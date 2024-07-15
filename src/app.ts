@@ -1,5 +1,6 @@
 import "dotenv/config";
-import express, { Express} from "express";
+import express, { Express, Request, Response} from "express";
+import { authenticateToken } from "./middlware/auth";
 const roomController = require("./controllers/roomController");
 const userController = require("./controllers/userController");
 const bookingController = require("./controllers/bookingController");
@@ -8,12 +9,18 @@ const loginController = require("./controllers/loginController");
 
 export const app: Express = express();
 app.use(express.json())
-app.use('/login', loginController)
-app.use('/room', roomController)
-app.use('/user', userController)
-app.use('/booking', bookingController)
-app.use('/contact', contactController)
 
+app.use('/login', loginController)
+app.use('/room', authenticateToken, roomController)
+app.use('/user', authenticateToken, userController)
+app.use('/booking', authenticateToken, bookingController)
+app.use('/contact', authenticateToken, contactController)
+
+app.use('/', (req:Request, res:Response) => {
+    console.log(req)
+    res.send('API Miranda\nRoutes: /room, /room/[número], /contact, /contact[número], /booking, /booking[número], /user, /user[número]')
+});
+ 
 /*
 app.use((err: Error, req: Request, res:Response) => {
     console.error(err)
