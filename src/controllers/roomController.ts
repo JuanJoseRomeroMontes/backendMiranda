@@ -1,10 +1,9 @@
-import express, { NextFunction, Request, Response} from "express";
+import express, { Request, Response} from "express";
 import { RoomInterface } from "../interfaces/interfaces";
 import { Room } from "../services/roomsServices";
 const router = express.Router();
 
-router.get('/', (req:Request, res:Response, next: NextFunction) => {
-    console.log(req+""+res+""+next)
+router.get('/', (_req:Request, res:Response) => {
     const rooms: RoomInterface[] = Room.getRoomList();
     return res.json({rooms});
 })
@@ -14,18 +13,15 @@ router.get('/:id', (req:Request, res:Response) => {
     return res.json({room});
 })
 
-router.post('/', (req:Request, res:Response, next: NextFunction) => {
-    console.log(req+""+res+""+next)
+router.post('/', (_req:Request, res:Response) => {
     return res.send("WIP create room");
 })
 
-router.patch('/:id', (req:Request, res:Response, next: NextFunction) => {
-    console.log(req+""+res+""+next)
+router.patch('/:id', (_req:Request, res:Response) => {
     return res.send("WIP edit room");
 })
 
-router.delete('/:id', (req:Request, res:Response, next: NextFunction) => {
-    console.log(req+""+res+""+next)
+router.delete('/:id', (_req:Request, res:Response) => {
     return res.send("WIP delete room");
 })
 

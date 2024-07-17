@@ -18,9 +18,9 @@ app.use('/contact', authenticateToken, contactController)
 
 app.use('/', (req:Request, res:Response) => {
     console.log(req)
-    res.send('API Miranda\nRoutes: /room, /room/[número], /contact, /contact[número], /booking, /booking[número], /user, /user[número]')
+    res.send('API Miranda | Juan José Romero Montes \nRoutes: /room, /room/[número], /contact, /contact[número], /booking, /booking[número], /user, /user[número]')
 });
- 
+
 /*
 app.use((err: Error, req: Request, res:Response) => {
     console.error(err)

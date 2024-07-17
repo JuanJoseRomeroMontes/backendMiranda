@@ -1,12 +1,11 @@
-import express, { NextFunction, Request, Response} from "express";
+import express, { Request, Response} from "express";
 import { BookingInterface } from "../interfaces/interfaces";
 import { Booking } from "../services/bookingServices";
 const router = express.Router();
 
-router.get('/', (req:Request, res:Response, next: NextFunction) => {
-    console.log(req+""+res+""+next)
-    const rooms: BookingInterface[] = Booking.getBookingList();
-    return res.json({rooms});
+router.get('/', (_req:Request, res:Response) => {
+    const bookings: BookingInterface[] = Booking.getBookingList();
+    return res.json({bookings});
 })
 
 router.get('/:id', (req:Request, res:Response) => {
@@ -14,18 +13,15 @@ router.get('/:id', (req:Request, res:Response) => {
     return res.json({booking});
 })
 
-router.post('/', (req:Request, res:Response, next: NextFunction) => {
-    console.log(req+""+res+""+next)
+router.post('/', (_req:Request, res:Response) => {
     return res.send("WIP create booking");
 })
 
-router.patch('/:id', (req:Request, res:Response, next: NextFunction) => {
-    console.log(req+""+res+""+next)
+router.patch('/:id', (_req:Request, res:Response) => {
     return res.send("WIP edit booking");
 })
 
-router.delete('/:id', (req:Request, res:Response, next: NextFunction) => {
-    console.log(req+""+res+""+next)
+router.delete('/:id', (_req:Request, res:Response) => {
     return res.send("WIP delete booking");
 })
 

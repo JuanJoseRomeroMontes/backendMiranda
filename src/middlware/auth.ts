@@ -10,9 +10,7 @@ export function authenticateToken(req:Request, res:Response, next:NextFunction) 
     if (token == null) return res.sendStatus(401)
 
     try{
-        var decoded = jwt.verify(token, process.env.TOKEN_SECRET);
-        if(!decoded)
-            throw new Error();
+        jwt.verify(token, process.env.TOKEN_SECRET);
 
         return next()
     }

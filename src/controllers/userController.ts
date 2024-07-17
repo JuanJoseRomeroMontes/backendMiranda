@@ -1,12 +1,11 @@
-import express, { NextFunction, Request, Response} from "express";
+import express, { Request, Response} from "express";
 import { UserInterface } from "../interfaces/interfaces";
 import { User } from "../services/userServices";
 const router = express.Router();
 
-router.get('/', (req:Request, res:Response, next: NextFunction) => {
-    console.log(req+""+res+""+next)
-    const rooms: UserInterface[] = User.getuserList();
-    return res.json({rooms});
+router.get('/', (_req:Request, res:Response) => {
+    const users: UserInterface[] = User.getuserList();
+    return res.json({users});
 })
 
 router.get('/:id', (req:Request, res:Response) => {
@@ -14,18 +13,15 @@ router.get('/:id', (req:Request, res:Response) => {
     return res.json({user});
 })
 
-router.post('/', (req:Request, res:Response, next: NextFunction) => {
-    console.log(req+""+res+""+next)
+router.post('/', (_req:Request, res:Response) => {
     return res.send("WIP create user");
 })
 
-router.patch('/:id', (req:Request, res:Response, next: NextFunction) => {
-    console.log(req+""+res+""+next)
+router.patch('/:id', (_req:Request, res:Response) => {
     return res.send("WIP edit user");
 })
 
-router.delete('/:id', (req:Request, res:Response, next: NextFunction) => {
-    console.log(req+""+res+""+next)
+router.delete('/:id', (_req:Request, res:Response) => {
     return res.send("WIP delete user");
 })
 
