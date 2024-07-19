@@ -7,6 +7,7 @@ dotenv.config();
 
 router.post('/', (req: Request, res: Response) => {
     const {username, password} = req.body;
+    
     if(username === "miranda@gmail.com" && password === "mirapass"){
         const token = jwt.sign(username, process.env.TOKEN_SECRET);
         return res.json({token});

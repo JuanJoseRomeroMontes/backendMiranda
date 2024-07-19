@@ -5,9 +5,10 @@ import { Booking } from "../services/bookingServices";
 import { Contact } from "../services/contactServices";
 import { User } from "../services/userServices";
 
+const jwt = require('jsonwebtoken');
 const request = require('supertest')
 const { app } = require('../app')
-const token = 'eyJhbGciOiJIUzI1NiJ9.bWlyYW5kYUBnbWFpbC5jb20.YDoTpiiJJcJWqDlcBpj7oQmuQhzD0Fvo43fzW0gQTzw';
+const token = jwt.sign("miranda@gmail.com", process.env.TOKEN_SECRET);
 
 describe('Get lists', () => {
   it('test getRoomList', async () => {
@@ -34,7 +35,6 @@ describe('Get lists', () => {
     expect(res.body).toMatchObject({contacts:Contact.getContactList()})
   })
 })
-
 
 describe('Get individual', () => {
   it('test getRoom', async () => {
