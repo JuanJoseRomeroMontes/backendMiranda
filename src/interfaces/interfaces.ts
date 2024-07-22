@@ -1,9 +1,9 @@
 export interface BookingInterface {
     fullName: string;
     id:number;
-    bookDate:string;
-    checkIn:string;
-    checkOut:string;
+    bookDate:Date;
+    checkIn:Date;
+    checkOut:Date;
     specialRequest:string;
     roomId:number;
     roomType:string;
@@ -15,7 +15,7 @@ export type BookingProperties = 'fullName' | 'id' | 'bookDate' | 'checkIn' | 'ch
                                 'roomNumber' | 'status';
 
 export interface ContactInterface {
-    date:string;
+    date:Date;
     client: {
         name:string;
         email:string;
@@ -30,14 +30,14 @@ export interface ContactInterface {
 export type ContactProperties = 'date' | 'id' | 'subject' | 'comment' | 'archived' | 'client';
 
 export interface UserInterface {
-    id:number;
+    id?:string;
     name:string;
     email:string;
     phone:string;
     photo:string;
     positionName:string,
     positionDescription:string,
-    date:string;
+    date:Date;
     status:boolean;
     password:string
 }
