@@ -1,28 +1,30 @@
 import express, { Request, Response} from "express";
-import { ContactInterface } from "../interfaces/interfaces";
 import { Contact } from "../services/contactServices";
 const router = express.Router();
 
-router.get('/', (_req:Request, res:Response) => {
-    const contacts: ContactInterface[] = Contact.getContactList();
+router.get('/', async (_req:Request, res:Response) => {
+    const contacts = Contact.getContactList();
     return res.json({contacts});
 })
 
-router.get('/:id', (req:Request, res:Response) => {
-    const contact: ContactInterface = Contact.getContact(+req.params.id);
+router.get('/:id', async (req:Request, res:Response) => {
+    const contact = Contact.getContact(+req.params.id);
     return res.json({contact});
 })
 
-router.post('/', (_req:Request, res:Response) => {
-    return res.send("WIP create contact");
+router.post('/', async (req:Request, res:Response) => {
+    const contact = await Contact.createContact(req.body);
+    return res.json({contact});
 })
 
-router.patch('/:id', (_req:Request, res:Response) => {
-    return res.send("WIP edit contact");
+router.patch('/:id', async (req:Request, res:Response) => {
+    const contact = await Contact.updateContact(req.body);
+    return res.json({contact});
 })
 
-router.delete('/:id', (_req:Request, res:Response) => {
-    return res.send("WIP delete contact");
+router.delete('/:id', async (req:Request, res:Response) => {
+    const contact = await Contact.deleteContact(+req.params.id);
+    return res.json({contact});
 })
 
 module.exports = router;

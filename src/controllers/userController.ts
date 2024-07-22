@@ -1,28 +1,30 @@
 import express, { Request, Response} from "express";
-import { UserInterface } from "../interfaces/interfaces";
 import { User } from "../services/userServices";
 const router = express.Router();
 
-router.get('/', (_req:Request, res:Response) => {
-    const users: UserInterface[] = User.getuserList();
+router.get('/', async (_req:Request, res:Response) => {
+    const users = await User.getUserList();
     return res.json({users});
 })
 
-router.get('/:id', (req:Request, res:Response) => {
-    const user: UserInterface = User.getuser(+req.params.id);
+router.get('/:id', async (req:Request, res:Response) => {
+    const user = await User.getUser(+req.params.id);
     return res.json({user});
 })
 
-router.post('/', (_req:Request, res:Response) => {
-    return res.send("WIP create user");
+router.post('/', async (req:Request, res:Response) => {
+    const user = await User.createUser(req.body);
+    return res.json({user});
 })
 
-router.patch('/:id', (_req:Request, res:Response) => {
-    return res.send("WIP edit user");
+router.patch('/:id', async (req:Request, res:Response) => {
+    const user = await User.updateUser(req.body);
+    return res.json({user});
 })
 
-router.delete('/:id', (_req:Request, res:Response) => {
-    return res.send("WIP delete user");
+router.delete('/:id', async (req:Request, res:Response) => {
+    const user = await User.deleteUser(+req.params.id);
+    return res.json({user});
 })
 
 module.exports = router;

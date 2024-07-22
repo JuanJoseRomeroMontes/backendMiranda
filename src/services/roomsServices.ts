@@ -1,30 +1,36 @@
-import roomsJson from '../data/roomsData.json';
 import { RoomInterface } from '../interfaces/interfaces';
+import { roomModel } from '../schemas/roomSchema';
 
 export class Room {
-    static getRoomList():RoomInterface[]{
-        return roomsJson;
+    static async getRoomList(){
+        const allRooms = await roomModel.find();
+        return allRooms;
     }
 
-    static getRoom(id:number):RoomInterface{
-        const room: RoomInterface | undefined = roomsJson.find(room => room.id === id);
+    static async getRoom(id:number){
+        const room = roomModel.findById(id);
         if (!room) 
             throw new Error('Cannot find room');
         return room;
     }
 
-    static createRoom(room:RoomInterface):RoomInterface{
-        //Add room and return it
-        return room;
+    static async createRoom(room:RoomInterface){
+        const newRoom = new roomModel({ ...room });
+        const insertedRoom = await newRoom.save();
+        return insertedRoom;
     }
 
-    static updateRoom(room:RoomInterface):RoomInterface{
-        //Update room and return it
-        return room;
+    static async updateRoom(room:RoomInterface){
+        const id = room.id;
+        await roomModel.updateOne({ id }, room);
+        const updatedRoom = await roomModel.findById(id);
+        return updatedRoom;
     }
 
-    static deleteRoom(id:number){
-        //DeleteRoom
-        console.log(id)
+    static async deleteRoom(id:number){
+        const deletedRoom = await roomModel.findByIdAndDelete(id);
+        if(!this.deleteRoom)
+            throw new Error(`Cannot delete room because it doesn't exist`);
+        return deletedRoom;
     }
 }

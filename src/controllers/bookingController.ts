@@ -1,28 +1,30 @@
 import express, { Request, Response} from "express";
-import { BookingInterface } from "../interfaces/interfaces";
 import { Booking } from "../services/bookingServices";
 const router = express.Router();
 
-router.get('/', (_req:Request, res:Response) => {
-    const bookings: BookingInterface[] = Booking.getBookingList();
+router.get('/', async (_req:Request, res:Response) => {
+    const bookings = Booking.getBookingList();
     return res.json({bookings});
 })
 
-router.get('/:id', (req:Request, res:Response) => {
-    const booking: BookingInterface = Booking.getBooking(+req.params.id);
+router.get('/:id', async (req:Request, res:Response) => {
+    const booking = Booking.getBooking(+req.params.id);
     return res.json({booking});
 })
 
-router.post('/', (_req:Request, res:Response) => {
-    return res.send("WIP create booking");
+router.post('/', async (req:Request, res:Response) => {
+    const booking = Booking.createBooking(req.body);
+    return res.json({booking});
 })
 
-router.patch('/:id', (_req:Request, res:Response) => {
-    return res.send("WIP edit booking");
+router.patch('/:id', async (req:Request, res:Response) => {
+    const booking = Booking.updateBooking(req.body);
+    return res.json({booking});
 })
 
-router.delete('/:id', (_req:Request, res:Response) => {
-    return res.send("WIP delete booking");
+router.delete('/:id', async (req:Request, res:Response) => {
+    const booking = Booking.deleteBooking(+req.params.id);
+    return res.json({booking});
 })
 
 module.exports = router;

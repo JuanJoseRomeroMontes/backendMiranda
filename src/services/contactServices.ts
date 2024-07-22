@@ -1,30 +1,36 @@
-import contactsJson from '../data/contactsData.json';
 import { ContactInterface } from '../interfaces/interfaces';
+import { contactModel } from '../schemas/contactSchema';
 
 export class Contact {
-    static getContactList():ContactInterface[]{
-        return contactsJson;
+    static async getContactList(){
+        const allContact = await contactModel.find();
+        return allContact;
     }
 
-    static getContact(id:number):ContactInterface{
-        const contact: ContactInterface | undefined = contactsJson.find(contact => contact.id === id);
+    static async getContact(id:number){
+        const contact = contactModel.findById(id);
         if (!contact) 
             throw new Error('Cannot find contact');
         return contact;
     }
 
-    static createContact(contact:ContactInterface):ContactInterface{
-        //Add contact and return it
-        return contact;
+    static async createContact(contact:ContactInterface){
+        const newContact = new contactModel({ ...contact });
+        const insertedContact = await newContact.save();
+        return insertedContact;
     }
 
-    static updateContact(contact:ContactInterface):ContactInterface{
-        //Update contact and return it
-        return contact;
+    static async updateContact(contact:ContactInterface){
+        const id = contact.id;
+        await contactModel.updateOne({ id }, contact);
+        const updatedContact = await contactModel.findById(id);
+        return updatedContact;
     }
 
-    static deleteContact(id:number){
-        //Delete contact
-        console.log(id)
+    static async deleteContact(id:number){
+        const deletedContact = await contactModel.findByIdAndDelete(id);
+        if (!deletedContact) 
+            throw new Error(`Cannot delete contact because it doesn't exist`);
+        return deletedContact;
     }
 }

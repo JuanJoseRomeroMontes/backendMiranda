@@ -1,30 +1,36 @@
-import usersJson from '../data/usersData.json';
 import { UserInterface } from '../interfaces/interfaces';
+import { userModel } from '../schemas/userSchema';
 
 export class User {
-    static getuserList():UserInterface[]{
-        return usersJson;
+    static async getUserList(){
+        const allUsers = await userModel.find();
+        return allUsers;
     }
 
-    static getuser(id:number):UserInterface{
-        const user: UserInterface | undefined = usersJson.find(user => user.id === id);
+    static getUser(id:number){
+        const user = userModel.findById(id);
         if (!user) 
             throw new Error('Cannot find user');
         return user;
     }
 
-    static createuser(user:UserInterface):UserInterface{
-        //Add user and return it
-        return user;
+    static async createUser(user:UserInterface){
+        const newUser = new userModel({ ...user });
+        const insertedUser = await newUser.save();
+        return insertedUser;
     }
 
-    static updateuser(user:UserInterface):UserInterface{
-        //Update user and return it
-        return user;
+    static async updateUser(user:UserInterface){
+        const id = user.id;
+        await userModel.updateOne({ id }, user);
+        const updatedUser = await userModel.findById(id);
+        return updatedUser;
     }
 
-    static deleteuser(id:number){
-        //Delete user
-        console.log(id)
+    static async deleteUser(id:number){
+        const deletedUser = await userModel.findByIdAndDelete(id);
+        if (!deletedUser) 
+            throw new Error(`Cannot delete user because it doesn't exist`);
+        return deletedUser;
     }
 }

@@ -1,30 +1,36 @@
-import bookingsJson from '../data/bookingsData.json';
 import { BookingInterface } from '../interfaces/interfaces';
+import { bookingModel } from '../schemas/bookingSchema';
 
 export class Booking {
-    static getBookingList():BookingInterface[]{
-        return bookingsJson;
+    static async getBookingList(){
+        const allBookings = await bookingModel.find();
+        return allBookings;
     }
 
-    static getBooking(id:number):BookingInterface{
-        const booking: BookingInterface | undefined = bookingsJson.find(booking => booking.id === id);
+    static async getBooking(id:number){
+        const booking = bookingModel.findById(id);
         if (!booking) 
             throw new Error('Cannot find booking');
         return booking;
     }
 
-    static createBooking(booking:BookingInterface):BookingInterface{
-        //Add booking and return it
-        return booking;
+    static async createBooking(booking:BookingInterface){
+        const newBooking = new bookingModel({ ...booking });
+        const insertedBooking = await newBooking.save();
+        return insertedBooking;
     }
 
-    static updateBooking(booking:BookingInterface):BookingInterface{
-        //Update booking and return it
-        return booking;
+    static async updateBooking(booking:BookingInterface){
+        const id = booking.id;
+        await bookingModel.updateOne({ id }, booking);
+        const updatedBooking = await bookingModel.findById(id);
+        return updatedBooking;
     }
 
-    static deleteBooking(id:number){
-        //Delete booking
-        console.log(id)
+    static async deleteBooking(id:number){
+        const deletedBooking = await bookingModel.findByIdAndDelete(id);
+        if (!deletedBooking) 
+            throw new Error(`Cannot delete booking because it doesn't exist`);
+        return deletedBooking;
     }
 }
