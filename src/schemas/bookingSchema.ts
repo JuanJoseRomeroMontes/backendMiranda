@@ -7,7 +7,7 @@ export const bookingSchema = new Schema<BookingInterface>({
   checkIn: { type: Date, required: true },
   checkOut: { type: Date, required: true },
   specialRequest: { type: String, required: true },
-  roomId: { type: Number, required: true },
+  roomId: { type: String, required: true },
   roomType: { type: String, required: true },
   roomNumber: { type: Number, required: true },
   status: { type: String, required: true }

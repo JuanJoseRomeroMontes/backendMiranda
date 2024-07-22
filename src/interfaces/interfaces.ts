@@ -5,14 +5,21 @@ export interface BookingInterface {
     checkIn:Date;
     checkOut:Date;
     specialRequest:string;
-    roomId:number;
+    roomId:string;
     roomType:string;
     roomNumber:number;
     status:string;
 }
 
-export type BookingProperties = 'fullName' | 'id' | 'bookDate' | 'checkIn' | 'checkOut' | 'specialRequest' | 'roomId' | 'roomType' |
-                                'roomNumber' | 'status';
+export interface BookingSimpleInterface {
+    fullName: string;
+    id:number;
+    bookDate:Date;
+    checkIn:Date;
+    checkOut:Date;
+    specialRequest:string;
+    roomId:string;
+}
 
 export interface ContactInterface {
     date:Date;
@@ -27,8 +34,6 @@ export interface ContactInterface {
     archived:boolean
 }
 
-export type ContactProperties = 'date' | 'id' | 'subject' | 'comment' | 'archived' | 'client';
-
 export interface UserInterface {
     id?:string;
     name:string;
@@ -41,9 +46,6 @@ export interface UserInterface {
     status:boolean;
     password:string
 }
-
-export type UserProperties = 'name' | 'id' | 'email' | 'phone' | 'photo' | 'date' | 'status' | 'password' | 'positionName' | 
-                                 'positionDescription';
 
 export interface RoomInterface {
     id:number;
@@ -59,5 +61,13 @@ export interface RoomInterface {
     photosArray: string[]
 }
 
-export type RoomProperties =    'id' | 'roomNumber' | 'availability' | 'roomType' | 'description' | 'offer' | 'price' | 'discount' | 
-                                'cancellation' | 'amenities' | 'photosArray';
+export type BookingProperties = 'fullName' | 'id' | 'bookDate' | 'checkIn' | 'checkOut' | 'specialRequest' | 'roomId' | 'roomType' |
+                                'roomNumber' | 'status';
+
+export type ContactProperties = 'date' | 'id' | 'subject' | 'comment' | 'archived' | 'client';
+
+export type UserProperties = 'name' | 'id' | 'email' | 'phone' | 'photo' | 'date' | 'status' | 'password' | 'positionName' | 
+                             'positionDescription';
+
+export type RoomProperties = 'id' | 'roomNumber' | 'availability' | 'roomType' | 'description' | 'offer' | 'price' | 'discount' | 
+                             'cancellation' | 'amenities' | 'photosArray';
