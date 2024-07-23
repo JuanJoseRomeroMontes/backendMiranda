@@ -8,7 +8,7 @@ router.get('/', async (_req:Request, res:Response) => {
 })
 
 router.get('/:id', async (req:Request, res:Response) => {
-    const contact = Contact.getContact(+req.params.id);
+    const contact = Contact.getContact(req.params.id);
     return res.json({contact});
 })
 
@@ -23,7 +23,7 @@ router.patch('/:id', async (req:Request, res:Response) => {
 })
 
 router.delete('/:id', async (req:Request, res:Response) => {
-    const contact = await Contact.deleteContact(+req.params.id);
+    const contact = await Contact.deleteContact(req.params.id);
     return res.json({contact});
 })
 

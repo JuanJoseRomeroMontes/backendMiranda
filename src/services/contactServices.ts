@@ -7,7 +7,7 @@ export class Contact {
         return allContact;
     }
 
-    static async getContact(id:number){
+    static async getContact(id:string){
         const contact = contactModel.findById(id);
         if (!contact) 
             throw new Error('Cannot find contact');
@@ -21,13 +21,13 @@ export class Contact {
     }
 
     static async updateContact(contact:ContactInterface){
-        const id = contact.id;
+        const id = contact._id;
         await contactModel.updateOne({ id }, contact);
         const updatedContact = await contactModel.findById(id);
         return updatedContact;
     }
 
-    static async deleteContact(id:number){
+    static async deleteContact(id:string){
         const deletedContact = await contactModel.findByIdAndDelete(id);
         if (!deletedContact) 
             throw new Error(`Cannot delete contact because it doesn't exist`);

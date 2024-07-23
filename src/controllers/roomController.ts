@@ -8,7 +8,7 @@ router.get('/', async (_req:Request, res:Response) => {
 })
 
 router.get('/:id', async (req:Request, res:Response) => {
-    const room = await Room.getRoom(+req.params.id);
+    const room = await Room.getRoom(req.params.id);
     return res.json({room});
 })
 
@@ -23,7 +23,7 @@ router.patch('/:id', async (req:Request, res:Response) => {
 })
 
 router.delete('/:id', async (req:Request, res:Response) => {
-    const room = await Room.deleteRoom(+req.params.id);
+    const room = await Room.deleteRoom(req.params.id);
     return res.json({room});
 })
 

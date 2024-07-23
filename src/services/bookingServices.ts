@@ -1,4 +1,4 @@
-import { BookingInterface } from '../interfaces/interfaces';
+import { BookingSimpleInterface } from '../interfaces/interfaces';
 import { bookingModel } from '../schemas/bookingSchema';
 
 export class Booking {
@@ -7,27 +7,27 @@ export class Booking {
         return allBookings;
     }
 
-    static async getBooking(id:number){
+    static async getBooking(id:string){
         const booking = bookingModel.findById(id);
         if (!booking) 
             throw new Error('Cannot find booking');
         return booking;
     }
 
-    static async createBooking(booking:BookingInterface){
+    static async createBooking(booking:BookingSimpleInterface){
         const newBooking = new bookingModel({ ...booking });
         const insertedBooking = await newBooking.save();
         return insertedBooking;
     }
 
-    static async updateBooking(booking:BookingInterface){
-        const id = booking.id;
+    static async updateBooking(booking:BookingSimpleInterface){
+        const id = booking._id;
         await bookingModel.updateOne({ id }, booking);
         const updatedBooking = await bookingModel.findById(id);
         return updatedBooking;
     }
 
-    static async deleteBooking(id:number){
+    static async deleteBooking(id:string){
         const deletedBooking = await bookingModel.findByIdAndDelete(id);
         if (!deletedBooking) 
             throw new Error(`Cannot delete booking because it doesn't exist`);

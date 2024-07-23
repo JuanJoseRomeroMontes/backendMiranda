@@ -7,7 +7,7 @@ export class Room {
         return allRooms;
     }
 
-    static async getRoom(id:number){
+    static async getRoom(id:string){
         const room = roomModel.findById(id);
         if (!room) 
             throw new Error('Cannot find room');
@@ -21,13 +21,13 @@ export class Room {
     }
 
     static async updateRoom(room:RoomInterface){
-        const id = room.id;
+        const id = room._id;
         await roomModel.updateOne({ id }, room);
         const updatedRoom = await roomModel.findById(id);
         return updatedRoom;
     }
 
-    static async deleteRoom(id:number){
+    static async deleteRoom(id:string){
         const deletedRoom = await roomModel.findByIdAndDelete(id);
         if(!this.deleteRoom)
             throw new Error(`Cannot delete room because it doesn't exist`);

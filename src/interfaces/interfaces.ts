@@ -1,6 +1,6 @@
 export interface BookingInterface {
     fullName: string;
-    id:number;
+    _id?:number;
     bookDate:Date;
     checkIn:Date;
     checkOut:Date;
@@ -13,7 +13,7 @@ export interface BookingInterface {
 
 export interface BookingSimpleInterface {
     fullName: string;
-    id:number;
+    _id?:number;
     bookDate:Date;
     checkIn:Date;
     checkOut:Date;
@@ -28,14 +28,14 @@ export interface ContactInterface {
         email:string;
         phone:string;
     };
-    id:number;
+    _id?:number;
     subject:string;
     comment:string;
     archived:boolean
 }
 
 export interface UserInterface {
-    id?:string;
+    _id?:string;
     name:string;
     email:string;
     phone:string;
@@ -48,7 +48,7 @@ export interface UserInterface {
 }
 
 export interface RoomInterface {
-    id:number;
+    _id?:number;
     roomNumber:number;
     availability: boolean;
     roomType:string;
