@@ -13,7 +13,8 @@ router.get('/:id', async (req:Request, res:Response) => {
 })
 
 router.post('/', async (req:Request, res:Response) => {
-    const booking = Booking.createBooking(req.body);
+    //Traer datos de room y pasarlos a createBooking
+    const booking = Booking.createBooking(req.body, req.body.roomId);
     return res.json({booking});
 })
 

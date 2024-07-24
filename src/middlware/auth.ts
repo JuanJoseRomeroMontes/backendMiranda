@@ -1,7 +1,5 @@
 import { NextFunction, Request, Response } from "express";
 const jwt = require('jsonwebtoken');
-const dotenv = require('dotenv');
-dotenv.config();
 
 export function authenticateToken(req:Request, res:Response, next:NextFunction) {
     const authHeader = req.headers['authorization']

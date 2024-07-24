@@ -6,6 +6,8 @@ const userController = require("./controllers/userController");
 const bookingController = require("./controllers/bookingController");
 const contactController = require("./controllers/contactController");
 const loginController = require("./controllers/loginController");
+const dotenv = require('dotenv');
+dotenv.config();
 
 export const app: Express = express();
 app.use(express.json())

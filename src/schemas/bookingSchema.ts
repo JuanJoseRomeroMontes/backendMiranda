@@ -3,9 +3,9 @@ import { BookingInterface } from '../interfaces/interfaces';
 
 export const bookingSchema = new Schema<BookingInterface>({
   fullName: { type: String, required: true },
-  bookDate: { type: Date, required: true },
-  checkIn: { type: Date, required: true },
-  checkOut: { type: Date, required: true },
+  bookDate: { type: String, required: true },
+  checkIn: { type: String, required: true },
+  checkOut: { type: String, required: true },
   specialRequest: { type: String, required: true },
   roomId: { type: String, required: true },
   roomType: { type: String, required: true },

@@ -16,10 +16,7 @@ export class User {
     }
 
     static async createUser(user:UserInterface){
-        let hashedPassword;
-        console.log("Moments before disaster "+process.env.SALT_ROUNDS);
-        await bcrypt.hash(user.password, process.env.SALT_ROUNDS) //, function(_err, hash) { hashedPassword = hash; }
-        console.log("Hash"+hashedPassword);
+        const hashedPassword = await bcrypt.hash(user.password, parseInt(process.env.SALT_ROUNDS as string)); //, function(_err, hash) { hashedPassword = hash; }
         const newUser = new userModel({ ...user, password: hashedPassword});
         const insertedUser = await newUser.save();
         return insertedUser;

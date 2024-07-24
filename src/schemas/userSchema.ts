@@ -8,7 +8,7 @@ export const userSchema = new Schema<UserInterface>({
   photo: { type: String, required: true },
   positionName: { type: String, required: true },
   positionDescription: { type: String, required: true },
-  date: { type: Date, required: true, default:new Date() },
+  date: { type: String, required: true, default: (new Date()).toString() },
   status: { type: Boolean, required: true, default:true },
   password: { type: String, required: true },
 });

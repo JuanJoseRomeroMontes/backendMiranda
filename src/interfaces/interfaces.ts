@@ -1,9 +1,9 @@
 export interface BookingInterface {
     fullName: string;
-    _id?:number;
-    bookDate:Date;
-    checkIn:Date;
-    checkOut:Date;
+    _id?:string;
+    bookDate:string;
+    checkIn:string;
+    checkOut:string;
     specialRequest:string;
     roomId:string;
     roomType:string;
@@ -13,22 +13,23 @@ export interface BookingInterface {
 
 export interface BookingSimpleInterface {
     fullName: string;
-    _id?:number;
-    bookDate:Date;
-    checkIn:Date;
-    checkOut:Date;
+    _id?:string;
+    bookDate:string;
+    checkIn:string;
+    checkOut:string;
     specialRequest:string;
     roomId:string;
+    status:string;
 }
 
 export interface ContactInterface {
-    date:Date;
+    date:string;
     client: {
         name:string;
         email:string;
         phone:string;
     };
-    _id?:number;
+    _id?:string;
     subject:string;
     comment:string;
     archived:boolean
@@ -42,13 +43,27 @@ export interface UserInterface {
     photo:string;
     positionName:string,
     positionDescription:string,
-    date:Date;
+    date:string;
     status:boolean;
     password:string
 }
 
 export interface RoomInterface {
-    _id?:number;
+    _id?:string;
+    roomNumber:number;
+    availability: boolean;
+    roomType:string;
+    description:string;
+    offer:boolean;
+    price:number;
+    discount:number;
+    cancellation:string;
+    amenities: string[];
+    photosArray: string[]
+}
+
+export interface MongoRoomInterface {
+    _id:string;
     roomNumber:number;
     availability: boolean;
     roomType:string;

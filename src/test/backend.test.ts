@@ -26,7 +26,7 @@ describe('Get lists', () => {
   it('test getUserList', async () => {
     const res = await request(app).get('/user').set('Authorization', 'Token '+token)
     
-    expect(res.body).toMatchObject({users:User.getuserList()})
+    expect(res.body).toMatchObject({users:User.getUserList()})
   })
 
   it('test getContactList', async () => {
@@ -40,24 +40,24 @@ describe('Get individual', () => {
   it('test getRoom', async () => {
     const res = await request(app).get('/room/0').set('Authorization', 'Token '+token)
     
-    expect(res.body).toMatchObject({room:Room.getRoomList()[0]})
+    expect(res.body).toMatchObject({room:Room.getRoom("")})
   })
 
   it('test getBooking', async () => {
     const res = await request(app).get('/booking/0').set('Authorization', 'Token '+token)
     
-    expect(res.body).toMatchObject({booking:Booking.getBookingList()[0]})
+    expect(res.body).toMatchObject({booking:Booking.getBooking("")})
   })
 
   it('test getUser', async () => {
     const res = await request(app).get('/user/0').set('Authorization', 'Token '+token)
     
-    expect(res.body).toMatchObject({user:User.getuserList()[0]})
+    expect(res.body).toMatchObject({user:User.getUser("")})
   })
 
   it('test getContact', async () => {
     const res = await request(app).get('/contact/0').set('Authorization', 'Token '+token)
     
-    expect(res.body).toMatchObject({contact:Contact.getContactList()[0]})
+    expect(res.body).toMatchObject({contact:Contact.getContact("")})
   })
 })

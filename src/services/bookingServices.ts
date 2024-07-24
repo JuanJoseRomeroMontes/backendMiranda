@@ -1,5 +1,6 @@
 import { BookingSimpleInterface } from '../interfaces/interfaces';
 import { bookingModel } from '../schemas/bookingSchema';
+import { Room } from './roomsServices';
 
 export class Booking {
     static async getBookingList(){
@@ -14,8 +15,9 @@ export class Booking {
         return booking;
     }
 
-    static async createBooking(booking:BookingSimpleInterface){
-        const newBooking = new bookingModel({ ...booking });
+    static async createBooking(booking:BookingSimpleInterface, roomId:string){
+        const room = await Room.getRoom(roomId);
+        const newBooking = new bookingModel({ ...booking, roomType: room?.roomType, roomNumber: room?.roomNumber});
         const insertedBooking = await newBooking.save();
         return insertedBooking;
     }

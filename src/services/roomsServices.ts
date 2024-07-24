@@ -1,4 +1,4 @@
-import { RoomInterface } from '../interfaces/interfaces';
+import { MongoRoomInterface, RoomInterface } from '../interfaces/interfaces';
 import { roomModel } from '../schemas/roomSchema';
 
 export class Room {
@@ -17,7 +17,7 @@ export class Room {
     static async createRoom(room:RoomInterface){
         const newRoom = new roomModel({ ...room });
         const insertedRoom = await newRoom.save();
-        return insertedRoom;
+        return insertedRoom as MongoRoomInterface;
     }
 
     static async updateRoom(room:RoomInterface){
