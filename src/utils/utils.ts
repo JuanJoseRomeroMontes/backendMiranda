@@ -1,3 +1,19 @@
+interface ErrorInterface {
+    status:number;
+    safe:boolean;
+}
+
+export class APIError extends Error implements ErrorInterface{
+    status: number;
+    safe: boolean;
+
+    constructor(message:string, status:number, safe = false){
+        super(message);
+        this.status = status;
+        this.safe = safe;
+    }
+}
+
 export function TrimDateString(date:string){
     return date.slice(0,6)
 }

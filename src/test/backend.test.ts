@@ -4,22 +4,11 @@ import roomsJson from '../data/roomsData.json';
 import bookingsJson from '../data/bookingsData.json';
 import contactsJson from '../data/contactsData.json';
 import usersJson from '../data/usersData.json';
-import mongoose from "mongoose";
 
 const jwt = require('jsonwebtoken');
 const request = require('supertest')
 const { app } = require('../app')
 const token = jwt.sign("miranda@gmail.com", process.env.TOKEN_SECRET);
-
-const connectToDb = async () => {
-	try {
-		await mongoose.connect(process.env.MONGO_URI as string);
-	} catch (error) {
-		console.error(error);
-	}
-};
-
-connectToDb();
 
 describe('Get lists', () => {
   it('test getRoomList', async () => {

@@ -1,5 +1,6 @@
 import { ContactInterface } from '../interfaces/interfaces';
 import { contactModel } from '../schemas/contactSchema';
+import { APIError } from '../utils/utils';
 
 export class Contact {
     static async getContactList(){
@@ -8,29 +9,37 @@ export class Contact {
     }
 
     static async getContact(id:string){
-        const contact = contactModel.findById(id);
+        const contact = await contactModel.findById(id);
         if (!contact) 
-            throw new Error('Cannot find contact');
+            throw new APIError('Cannot find contact', 404, true);
         return contact;
     }
 
     static async createContact(contact:ContactInterface){
-        const newContact = new contactModel({ ...contact });
-        const insertedContact = await newContact.save();
-        return insertedContact;
+        try {
+            const newContact = new contactModel({ ...contact });
+            const insertedContact = await newContact.save();
+            return insertedContact;
+        } catch (error) {
+            throw new APIError('Unexpected error while creating new contact', 500, true);
+        }
     }
 
     static async updateContact(contact:ContactInterface){
-        const id = contact._id;
-        await contactModel.updateOne({ id }, contact);
-        const updatedContact = await contactModel.findById(id);
-        return updatedContact;
+        try {
+            const id = contact._id;
+            await contactModel.updateOne({ id }, contact);
+            const updatedContact = await contactModel.findById(id);
+            return updatedContact;
+        } catch (error) {
+            throw new APIError('Unexpected error while updating contact, make sure that the contact exist in the Database', 500, true);
+        }
     }
 
     static async deleteContact(id:string){
         const deletedContact = await contactModel.findByIdAndDelete(id);
         if (!deletedContact) 
-            throw new Error(`Cannot delete contact because it doesn't exist`);
+            throw new APIError('Cannot delete contact because it does not exist', 404);
         return deletedContact;
     }
 }
