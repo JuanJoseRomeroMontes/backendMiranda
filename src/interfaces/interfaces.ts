@@ -1,18 +1,26 @@
 export interface BookingInterface {
     fullName: string;
-    id:number;
+    _id?:string;
     bookDate:string;
     checkIn:string;
     checkOut:string;
     specialRequest:string;
-    roomId:number;
+    roomId:string;
     roomType:string;
     roomNumber:number;
     status:string;
 }
 
-export type BookingProperties = 'fullName' | 'id' | 'bookDate' | 'checkIn' | 'checkOut' | 'specialRequest' | 'roomId' | 'roomType' |
-                                'roomNumber' | 'status';
+export interface BookingSimpleInterface {
+    fullName: string;
+    _id?:string;
+    bookDate:string;
+    checkIn:string;
+    checkOut:string;
+    specialRequest:string;
+    roomId:string;
+    status:string;
+}
 
 export interface ContactInterface {
     date:string;
@@ -21,16 +29,14 @@ export interface ContactInterface {
         email:string;
         phone:string;
     };
-    id:number;
+    _id?:string;
     subject:string;
     comment:string;
     archived:boolean
 }
 
-export type ContactProperties = 'date' | 'id' | 'subject' | 'comment' | 'archived' | 'client';
-
 export interface UserInterface {
-    id:number;
+    _id?:string;
     name:string;
     email:string;
     phone:string;
@@ -42,11 +48,8 @@ export interface UserInterface {
     password:string
 }
 
-export type UserProperties = 'name' | 'id' | 'email' | 'phone' | 'photo' | 'date' | 'status' | 'password' | 'positionName' | 
-                                 'positionDescription';
-
 export interface RoomInterface {
-    id:number;
+    _id?:string;
     roomNumber:number;
     availability: boolean;
     roomType:string;
@@ -59,5 +62,27 @@ export interface RoomInterface {
     photosArray: string[]
 }
 
-export type RoomProperties =    'id' | 'roomNumber' | 'availability' | 'roomType' | 'description' | 'offer' | 'price' | 'discount' | 
-                                'cancellation' | 'amenities' | 'photosArray';
+export interface MongoRoomInterface {
+    _id:string;
+    roomNumber:number;
+    availability: boolean;
+    roomType:string;
+    description:string;
+    offer:boolean;
+    price:number;
+    discount:number;
+    cancellation:string;
+    amenities: string[];
+    photosArray: string[]
+}
+
+export type BookingProperties = 'fullName' | 'id' | 'bookDate' | 'checkIn' | 'checkOut' | 'specialRequest' | 'roomId' | 'roomType' |
+                                'roomNumber' | 'status';
+
+export type ContactProperties = 'date' | 'id' | 'subject' | 'comment' | 'archived' | 'client';
+
+export type UserProperties = 'name' | 'id' | 'email' | 'phone' | 'photo' | 'date' | 'status' | 'password' | 'positionName' | 
+                             'positionDescription';
+
+export type RoomProperties = 'id' | 'roomNumber' | 'availability' | 'roomType' | 'description' | 'offer' | 'price' | 'discount' | 
+                             'cancellation' | 'amenities' | 'photosArray';

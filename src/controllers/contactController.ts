@@ -1,28 +1,55 @@
-import express, { Request, Response} from "express";
-import { ContactInterface } from "../interfaces/interfaces";
+import express, { NextFunction, Request, Response} from "express";
 import { Contact } from "../services/contactServices";
 const router = express.Router();
 
-router.get('/', (_req:Request, res:Response) => {
-    const contacts: ContactInterface[] = Contact.getContactList();
-    return res.json({contacts});
+router.get('/', async (_req:Request, res:Response, next:NextFunction) => {
+    try {
+        const contacts = Contact.getContactList();
+        return res.json({contacts});
+    } catch (error) {
+        next(error)
+        return res.json({});
+    }
 })
 
-router.get('/:id', (req:Request, res:Response) => {
-    const contact: ContactInterface = Contact.getContact(+req.params.id);
-    return res.json({contact});
+router.get('/:id', async (req:Request, res:Response, next:NextFunction) => {
+    try {
+        const contact = Contact.getContact(req.params.id);
+        return res.json({contact});
+    } catch (error) {
+        next(error)
+        return res.json({});
+    }
 })
 
-router.post('/', (_req:Request, res:Response) => {
-    return res.send("WIP create contact");
+router.post('/', async (req:Request, res:Response, next:NextFunction) => {
+    try {
+        const contact = await Contact.createContact(req.body);
+        return res.json({contact});
+    } catch (error) {
+        next(error)
+        return res.json({});
+    }
 })
 
-router.patch('/:id', (_req:Request, res:Response) => {
-    return res.send("WIP edit contact");
+router.patch('/:id', async (req:Request, res:Response, next:NextFunction) => {
+    try {
+        const contact = await Contact.updateContact(req.body);
+        return res.json({contact});
+    } catch (error) {
+        next(error)
+        return res.json({});
+    }
 })
 
-router.delete('/:id', (_req:Request, res:Response) => {
-    return res.send("WIP delete contact");
+router.delete('/:id', async (req:Request, res:Response, next:NextFunction) => {
+    try {
+        const contact = await Contact.deleteContact(req.params.id);
+        return res.json({contact});
+    } catch (error) {
+        next(error)
+        return res.json({});
+    }
 })
 
 module.exports = router;

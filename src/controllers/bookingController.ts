@@ -1,28 +1,52 @@
-import express, { Request, Response} from "express";
-import { BookingInterface } from "../interfaces/interfaces";
+import express, { NextFunction, Request, Response} from "express";
 import { Booking } from "../services/bookingServices";
 const router = express.Router();
 
-router.get('/', (_req:Request, res:Response) => {
-    const bookings: BookingInterface[] = Booking.getBookingList();
-    return res.json({bookings});
+router.get('/', async (_req:Request, res:Response, next:NextFunction):Promise<Response<JSON> | void> => {
+    try {
+        const bookings = await Booking.getBookingList();
+        return res.json({bookings});
+    } catch (error) {
+        console.log("Booking not found controller")
+        next(error)
+    }
 })
 
-router.get('/:id', (req:Request, res:Response) => {
-    const booking: BookingInterface = Booking.getBooking(+req.params.id);
-    return res.json({booking});
+router.get('/:id', async (req:Request, res:Response, next:NextFunction):Promise<Response<JSON> | void> => {
+    try {
+        const booking = await Booking.getBooking(req.params.id);
+        return res.json({booking});
+    } catch (error) {
+        next(error)
+    }
 })
 
-router.post('/', (_req:Request, res:Response) => {
-    return res.send("WIP create booking");
+router.post('/', async (req:Request, res:Response, next:NextFunction):Promise<Response<JSON> | void> => {
+    //Traer datos de room y pasarlos a createBooking
+    try {
+        const booking = await Booking.createBooking(req.body, req.body.roomId);
+        return res.json({booking});
+    } catch (error) {
+        next(error)
+    }
 })
 
-router.patch('/:id', (_req:Request, res:Response) => {
-    return res.send("WIP edit booking");
+router.patch('/:id', async (req:Request, res:Response, next:NextFunction):Promise<Response<JSON> | void> => {
+    try {
+        const booking = await Booking.updateBooking(req.body);
+        return res.json({booking});
+    } catch (error) {
+        next(error)
+    }
 })
 
-router.delete('/:id', (_req:Request, res:Response) => {
-    return res.send("WIP delete booking");
+router.delete('/:id', async (req:Request, res:Response, next:NextFunction):Promise<Response<JSON> | void> => {
+    try {
+        const booking = await Booking.deleteBooking(req.params.id);
+        return res.json({booking});
+    } catch (error) {
+        next(error)
+    }
 })
 
 module.exports = router;
