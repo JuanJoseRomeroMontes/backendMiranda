@@ -22,6 +22,16 @@ export interface BookingSimpleInterface {
     status:string;
 }
 
+export interface BookingSimpleInterfaceNOId {
+    fullName: string;
+    bookDate:string;
+    checkIn:string;
+    checkOut:string;
+    specialRequest:string;
+    roomId:string;
+    status:string;
+}
+
 export interface ContactInterface {
     date:string;
     client: {

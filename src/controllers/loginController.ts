@@ -5,12 +5,11 @@ const router = express.Router();
 
 router.post('/', async (req: Request, res: Response) => {
     const {email, password} = req.body;
-
-    const allowAcces = await Login.checkUser(email, password)
+    const verification = await Login.checkUser(email, password)
     
-    if(allowAcces){
+    if(verification.allowAcces){
         const token = await Login.generateToken(email);
-        return res.json({token});
+        return res.json({token:token, name:verification.name, photo:verification.photo});
     }
     return res.status(401).json({message:"Invalid credentials"})
 })

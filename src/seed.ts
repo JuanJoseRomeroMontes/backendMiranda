@@ -23,8 +23,9 @@ async function setUpDB(){
 
         for (const collection of collections) {
             await collection.deleteMany({});
-        }*/
+        }
         console.log("Database cleared!\n");
+        */
     }  catch (err) {
         console.log(err);
     }

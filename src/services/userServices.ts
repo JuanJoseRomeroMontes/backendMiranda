@@ -29,9 +29,7 @@ export class User {
 
     static async updateUser(user:UserInterface){
         try {
-            const id = user._id;
-            await userModel.updateOne({ id }, user);
-            const updatedUser = await userModel.findById(id);
+            const updatedUser = await userModel.findByIdAndUpdate(user._id, user, { new: true });
             return updatedUser;
         } catch (error) {
             throw new APIError('Unexpected error while updating user, make sure that the user exist in the Database', 500, true);

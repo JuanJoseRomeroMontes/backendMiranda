@@ -27,9 +27,7 @@ export class Contact {
 
     static async updateContact(contact:ContactInterface){
         try {
-            const id = contact._id;
-            await contactModel.updateOne({ id }, contact);
-            const updatedContact = await contactModel.findById(id);
+            const updatedContact = await contactModel.findByIdAndUpdate(contact._id, contact, { new: true });
             return updatedContact;
         } catch (error) {
             throw new APIError('Unexpected error while updating contact, make sure that the contact exist in the Database', 500, true);
@@ -37,6 +35,7 @@ export class Contact {
     }
 
     static async deleteContact(id:string){
+        console.log(id);
         const deletedContact = await contactModel.findByIdAndDelete(id);
         if (!deletedContact) 
             throw new APIError('Cannot delete contact because it does not exist', 404);

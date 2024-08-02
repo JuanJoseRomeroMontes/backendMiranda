@@ -1,4 +1,4 @@
-import { BookingSimpleInterface } from '../interfaces/interfaces';
+import { BookingSimpleInterface, BookingSimpleInterfaceNOId } from '../interfaces/interfaces';
 import { bookingModel } from '../schemas/bookingSchema';
 import { APIError } from '../utils/utils';
 import { Room } from './roomsServices';
@@ -18,7 +18,7 @@ export class Booking {
         return booking;
     }
 
-    static async createBooking(booking:BookingSimpleInterface, roomId:string){
+    static async createBooking(booking:BookingSimpleInterfaceNOId, roomId:string){
         const room = await Room.getRoom(roomId);
         if (!room) {
             throw new APIError(`Cannot find the booking's roomId in the rooms Database`, 404, true);
@@ -27,15 +27,14 @@ export class Booking {
             const newBooking = new bookingModel({ ...booking, roomType: room?.roomType, roomNumber: room?.roomNumber});
             const insertedBooking = await newBooking.save();
             return insertedBooking;
-        } catch (error) {
-            throw new APIError(`Unexpected error while creating new booking`, 500, true);
+        } catch (error:any) {
+            throw new APIError(`Unexpected error while creating new booking. Message:${error.message}`, 500, true);
         }
     }
 
     static async updateBooking(booking:BookingSimpleInterface){
         try {
-            const id = booking._id;
-            const updatedBooking = await bookingModel.updateOne({ id }, booking);
+            const updatedBooking = await bookingModel.findByIdAndUpdate(booking._id, booking, { new: true });
             return updatedBooking;
         } catch (error) {
             throw new APIError(`Unexpected error while updating booking, make sure that the booking exist in the Database`, 500, true);

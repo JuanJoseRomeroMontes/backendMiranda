@@ -24,7 +24,7 @@ router.get('/:id', async (req:Request, res:Response, next:NextFunction):Promise<
 router.post('/', async (req:Request, res:Response, next:NextFunction):Promise<Response<JSON> | void> => {
     //Traer datos de room y pasarlos a createBooking
     try {
-        const booking = await Booking.createBooking(req.body, req.body.roomId);
+        const booking = await Booking.createBooking(req.body.booking, req.body.roomId);
         return res.json({booking});
     } catch (error) {
         next(error)
