@@ -9,15 +9,15 @@ export class Login {
         return jwt.sign(email, process.env.TOKEN_SECRET);;
     }
 
-    static async checkUser(inputedEmail:string, inputedPassword:string):Promise<boolean> {
+    static async checkUser(inputedEmail:string, inputedPassword:string):Promise<{allowAcces:boolean, name:string, photo:string}> {
         let passMatch = false;
     
         const fetchedEmailList = await userModel.find({ email: inputedEmail });
         if (fetchedEmailList.length < 1)
-            return false;
+            return {allowAcces:false, name:"", photo:""};
         
         passMatch = await bcrypt.compare(inputedPassword, fetchedEmailList[0].password);
         
-        return passMatch;
+        return {allowAcces:passMatch, name:fetchedEmailList[0].name, photo:fetchedEmailList[0].photo };
     }
 }

@@ -27,9 +27,7 @@ export class Room {
 
     static async updateRoom(room:RoomInterface){
         try {
-            const id = room._id;
-            await roomModel.updateOne({ id }, room);
-            const updatedRoom = await roomModel.findById(id);
+            const updatedRoom = await roomModel.findByIdAndUpdate(room._id, room, { new: true });
             return updatedRoom;
         } catch (error) {
             throw new APIError('Unexpected error while updating rooms, make sure that the rooms exist in the Database', 500, true);

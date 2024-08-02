@@ -11,8 +11,10 @@ dotenv.config();
 import mongoose from 'mongoose';
 import { APIError } from "./utils/utils";
 
+let cors = require('cors');
 export const app: Express = express();
 app.use(express.json())
+app.use(cors())
 
 const start = async () => {
 	try {
@@ -25,8 +27,7 @@ const start = async () => {
 
 start();
 
-app.get('/', (req:Request, res:Response) => {
-    console.log(req)
+app.get('/', (_req:Request, res:Response) => {
     res.send('API Miranda | Juan José Romero Montes \nRoutes: /room, /room/[número], /contact, /contact[número], /booking, /booking[número], /user, /user[número]')
 });
 
@@ -37,7 +38,6 @@ app.use('/booking', authenticateToken, bookingController)
 app.use('/contact', authenticateToken, contactController)
 
 app.use((err: APIError, req: Request, res:Response) => {
-	console.log("ENTERING ERROR")
 	let responseMessage = "Aplication error";
 	if(err.safe)
 		responseMessage = err.message

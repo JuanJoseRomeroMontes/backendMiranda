@@ -14,12 +14,8 @@ export class APIError extends Error implements ErrorInterface{
     }
 }
 
-export function TrimDateString(date:string){
-    return date.slice(0,6)
-}
-
 export function DateToString(date: Date){
-    return date.toString().slice(0,6)
+    return date.toISOString().split('T')[0]
 }
 
 export function StringToDate(string: string){
