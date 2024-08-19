@@ -8,8 +8,8 @@ const contactController = require("./controllers/contactController");
 const loginController = require("./controllers/loginController");
 const dotenv = require('dotenv');
 dotenv.config();
-import mongoose from 'mongoose';
 import { APIError } from "./utils/utils";
+import mysql from 'mysql2/promise';
 
 let cors = require('cors');
 export const app: Express = express();
@@ -18,7 +18,11 @@ app.use(cors())
 
 const start = async () => {
 	try {
-		await mongoose.connect(process.env.MONGO_URI as string);
+		await mysql.createConnection({
+			host: 'localhost',
+			user: 'root',
+			database: 'MirandaDB',
+		  })
 	} catch (error) {
 		console.error(error);
 		process.exit(1);
