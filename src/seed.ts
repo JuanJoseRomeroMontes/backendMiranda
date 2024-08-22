@@ -5,27 +5,22 @@ import { Contact } from "./services/contactServices";
 import { Booking } from "./services/bookingServices";
 import { faker } from '@faker-js/faker';
 import { DateToString } from './utils/utils';
-import mongoose from 'mongoose';
+import mysql from 'mysql2/promise';
 
 const dotenv = require('dotenv');
 dotenv.config();
 
-const dataNumber = 10;
+const dataNumber = 20;
 
 async function setUpDB(){
     try {
-        await mongoose.connect(process.env.MONGO_URI as string);
-        console.log("Connected correctly to server\n");
+        await mysql.createConnection({
+			host: process.env.HOST as string,
+			user: process.env.USER as string,
+			database: process.env.DATABASE as string,
+		})
 
-        /*Clear DB
-        const db = client.db(dbName);
-        const collections = await db.collections();
-
-        for (const collection of collections) {
-            await collection.deleteMany({});
-        }
-        console.log("Database cleared!\n");
-        */
+        console.log("Connected to server correctly\n");
     }  catch (err) {
         console.log(err);
     }

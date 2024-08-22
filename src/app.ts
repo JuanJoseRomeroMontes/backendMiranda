@@ -19,9 +19,9 @@ app.use(cors())
 const start = async () => {
 	try {
 		await mysql.createConnection({
-			host: 'localhost',
-			user: 'root',
-			database: 'MirandaDB',
+			host: process.env.HOST as string,
+			user: process.env.USER as string,
+			database: process.env.DATABASE as string,
 		  })
 	} catch (error) {
 		console.error(error);
