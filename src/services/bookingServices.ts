@@ -24,7 +24,7 @@ export class Booking {
             throw new APIError(`Cannot find the booking's roomId in the rooms Database`, 404, true);
         }
         try {
-            const newBooking = new bookingModel({ ...booking, roomType: room?.roomType, roomNumber: room?.roomNumber});
+            const newBooking = new bookingModel({ ...booking, roomType:1, roomNumber: 1});
             const insertedBooking = await newBooking.save();
             return insertedBooking;
         } catch (error:any) {
