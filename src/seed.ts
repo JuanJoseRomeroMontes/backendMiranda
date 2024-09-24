@@ -1,6 +1,5 @@
-import { BookingSimpleInterface, ContactInterface, MongoRoomInterface, RoomInterface, UserInterface } from './interfaces/interfaces';
+import { BookingSimpleInterface, ContactInterface, MongoRoomInterface, UserInterface } from './interfaces/interfaces';
 import { User } from "./services/userServices";
-import { Room } from "./services/roomsServices";
 import { Contact } from "./services/contactServices";
 import { Booking } from "./services/bookingServices";
 import { faker } from '@faker-js/faker';
@@ -78,7 +77,7 @@ async function seedContacts() {
 }
 
 const roomList:MongoRoomInterface[] = [];
-
+/*
 async function seedRooms() {
     const roomTypes:string[] = ['Single Bed', 'Double Bed', 'Double Superior', 'Suite'];
     const amenities:string[] = ['Air conditioner', 'High speed WiFi', 'Breakfast', 'Kitchen', 'Cleaning', 'Shower', 'Grocery',
@@ -114,7 +113,7 @@ async function seedRooms() {
         console.log(err);
     }
 }
-
+*/
 async function seedBookings() {
     try {
         const statuses:string[] = ["Check out", "Check in", "In progress"]
@@ -148,7 +147,7 @@ async function seedDB(){
     await setUpDB();
     await seedUsers();
     await seedContacts();
-    await seedRooms();
+    //await seedRooms();
     await seedBookings();
     console.log("Database seeded!\n");
 }
