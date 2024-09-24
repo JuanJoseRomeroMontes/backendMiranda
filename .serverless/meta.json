@@ -1,11 +1,12 @@
 {
   "F:\\Training FullStack Proyectos\\mirandaBackend": {
     "versionSfCore": null,
-    "versionFramework": "4.1.16",
+    "versionFramework": "4.2.4",
     "isWithinCompose": false,
     "isCompose": false,
     "composeOrgName": null,
     "composeResolverProviders": {
+      "default-aws-credential-resolver": "<REDACTED>",
       "env": {
         "instance": {
           "credentials": "<REDACTED>",
@@ -20,14 +21,14 @@
               ],
               "artifactsS3KeyDirname": "serverless/miranda-backend/dev/code-artifacts",
               "artifact": "F:\\Training FullStack Proyectos\\mirandaBackend\\.serverless\\miranda-backend.zip",
-              "artifactDirectoryName": "serverless/miranda-backend/dev/1722006162240-2024-07-26T15:02:42.240Z"
+              "artifactDirectoryName": "serverless/miranda-backend/dev/1724941206949-2024-08-29T14:20:06.949Z"
             },
             "provider": {
               "name": "aws",
               "region": "eu-west-3",
               "environment": {
                 "TOKEN_SECRET": "<REDACTED>",
-                "MONGO_URI": "mongodb+srv://miranda:mirapass@mirandacluster.shh2l39.mongodb.net/miranda?retryWrites=true&w=majority&appName=MirandaCluster"
+                "MONGO_URI": "mongodb+srv://miranda:mirapass@miranda.shh2l39.mongodb.net/"
               },
               "runtime": "nodejs20.x",
               "stage": "dev",
@@ -196,7 +197,7 @@
                         "S3Bucket": {
                           "Ref": "ServerlessDeploymentBucket"
                         },
-                        "S3Key": "serverless/miranda-backend/dev/1722006162240-2024-07-26T15:02:42.240Z/miranda-backend.zip"
+                        "S3Key": "serverless/miranda-backend/dev/1724941206949-2024-08-29T14:20:06.949Z/miranda-backend.zip"
                       },
                       "Handler": "dist/lambda.handler",
                       "Runtime": "nodejs20.x",
@@ -206,7 +207,7 @@
                       "Environment": {
                         "Variables": {
                           "TOKEN_SECRET": "<REDACTED>",
-                          "MONGO_URI": "mongodb+srv://miranda:mirapass@mirandacluster.shh2l39.mongodb.net/miranda?retryWrites=true&w=majority&appName=MirandaCluster"
+                          "MONGO_URI": "mongodb+srv://miranda:mirapass@miranda.shh2l39.mongodb.net/"
                         }
                       },
                       "Role": {
@@ -220,14 +221,14 @@
                       "AppLogGroup"
                     ]
                   },
-                  "AppLambdaVersionvyVZfegvaU0pDapq0pzoK2VLUOfEnrkWCSWMwJLCuy0": {
+                  "AppLambdaVersionW85pSmwfuXCglZDERJ7HlYWakniGdv2sYlAefWPWKUY": {
                     "Type": "AWS::Lambda::Version",
                     "DeletionPolicy": "Retain",
                     "Properties": {
                       "FunctionName": {
                         "Ref": "AppLambdaFunction"
                       },
-                      "CodeSha256": "DOy+uFKbUiw9FchSTy22JOFj5xjFHExh96Ulxe1LGF0="
+                      "CodeSha256": "27FnsltlZgg20bwS0jXJzk+BA9AY+Cky4b7VRUJ13Xg="
                     }
                   },
                   "ApiGatewayRestApi": {
@@ -445,7 +446,7 @@
                       "AppLambdaPermissionApiGateway"
                     ]
                   },
-                  "ApiGatewayDeployment1722006148384": {
+                  "ApiGatewayDeployment1724941140825": {
                     "Type": "AWS::ApiGateway::Deployment",
                     "Properties": {
                       "RestApiId": {
@@ -510,7 +511,7 @@
                   "AppLambdaFunctionQualifiedArn": {
                     "Description": "Current Lambda function version",
                     "Value": {
-                      "Ref": "AppLambdaVersionvyVZfegvaU0pDapq0pzoK2VLUOfEnrkWCSWMwJLCuy0"
+                      "Ref": "AppLambdaVersionW85pSmwfuXCglZDERJ7HlYWakniGdv2sYlAefWPWKUY"
                     },
                     "Export": {
                       "Name": "sls-miranda-backend-dev-AppLambdaFunctionQualifiedArn"
@@ -687,7 +688,7 @@
                 "timeout": 6,
                 "runtime": "nodejs20.x",
                 "vpc": {},
-                "versionLogicalId": "AppLambdaVersionvyVZfegvaU0pDapq0pzoK2VLUOfEnrkWCSWMwJLCuy0"
+                "versionLogicalId": "AppLambdaVersionW85pSmwfuXCglZDERJ7HlYWakniGdv2sYlAefWPWKUY"
               }
             }
           },
@@ -697,7 +698,8 @@
           },
           "options": {},
           "stage": "dev",
-          "dashboard": null
+          "dashboard": null,
+          "_credentialsPromise": "<REDACTED>"
         },
         "resolvers": {}
       }
@@ -716,14 +718,14 @@
         ],
         "artifactsS3KeyDirname": "serverless/miranda-backend/dev/code-artifacts",
         "artifact": "F:\\Training FullStack Proyectos\\mirandaBackend\\.serverless\\miranda-backend.zip",
-        "artifactDirectoryName": "serverless/miranda-backend/dev/1722006162240-2024-07-26T15:02:42.240Z"
+        "artifactDirectoryName": "serverless/miranda-backend/dev/1724941206949-2024-08-29T14:20:06.949Z"
       },
       "provider": {
         "name": "aws",
         "region": "eu-west-3",
         "environment": {
           "TOKEN_SECRET": "<REDACTED>",
-          "MONGO_URI": "mongodb+srv://miranda:mirapass@mirandacluster.shh2l39.mongodb.net/miranda?retryWrites=true&w=majority&appName=MirandaCluster"
+          "MONGO_URI": "mongodb+srv://miranda:mirapass@miranda.shh2l39.mongodb.net/"
         },
         "runtime": "nodejs20.x",
         "stage": "dev",
@@ -892,7 +894,7 @@
                   "S3Bucket": {
                     "Ref": "ServerlessDeploymentBucket"
                   },
-                  "S3Key": "serverless/miranda-backend/dev/1722006162240-2024-07-26T15:02:42.240Z/miranda-backend.zip"
+                  "S3Key": "serverless/miranda-backend/dev/1724941206949-2024-08-29T14:20:06.949Z/miranda-backend.zip"
                 },
                 "Handler": "dist/lambda.handler",
                 "Runtime": "nodejs20.x",
@@ -902,7 +904,7 @@
                 "Environment": {
                   "Variables": {
                     "TOKEN_SECRET": "<REDACTED>",
-                    "MONGO_URI": "mongodb+srv://miranda:mirapass@mirandacluster.shh2l39.mongodb.net/miranda?retryWrites=true&w=majority&appName=MirandaCluster"
+                    "MONGO_URI": "mongodb+srv://miranda:mirapass@miranda.shh2l39.mongodb.net/"
                   }
                 },
                 "Role": {
@@ -916,14 +918,14 @@
                 "AppLogGroup"
               ]
             },
-            "AppLambdaVersionvyVZfegvaU0pDapq0pzoK2VLUOfEnrkWCSWMwJLCuy0": {
+            "AppLambdaVersionW85pSmwfuXCglZDERJ7HlYWakniGdv2sYlAefWPWKUY": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "AppLambdaFunction"
                 },
-                "CodeSha256": "DOy+uFKbUiw9FchSTy22JOFj5xjFHExh96Ulxe1LGF0="
+                "CodeSha256": "27FnsltlZgg20bwS0jXJzk+BA9AY+Cky4b7VRUJ13Xg="
               }
             },
             "ApiGatewayRestApi": {
@@ -1141,7 +1143,7 @@
                 "AppLambdaPermissionApiGateway"
               ]
             },
-            "ApiGatewayDeployment1722006148384": {
+            "ApiGatewayDeployment1724941140825": {
               "Type": "AWS::ApiGateway::Deployment",
               "Properties": {
                 "RestApiId": {
@@ -1206,7 +1208,7 @@
             "AppLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "AppLambdaVersionvyVZfegvaU0pDapq0pzoK2VLUOfEnrkWCSWMwJLCuy0"
+                "Ref": "AppLambdaVersionW85pSmwfuXCglZDERJ7HlYWakniGdv2sYlAefWPWKUY"
               },
               "Export": {
                 "Name": "sls-miranda-backend-dev-AppLambdaFunctionQualifiedArn"
@@ -1383,7 +1385,7 @@
           "timeout": 6,
           "runtime": "nodejs20.x",
           "vpc": {},
-          "versionLogicalId": "AppLambdaVersionvyVZfegvaU0pDapq0pzoK2VLUOfEnrkWCSWMwJLCuy0"
+          "versionLogicalId": "AppLambdaVersionW85pSmwfuXCglZDERJ7HlYWakniGdv2sYlAefWPWKUY"
         }
       }
     },
@@ -1414,16 +1416,18 @@
     "userEmail": "juanjo.romero.dev@gmail.com",
     "serviceProviderAwsCredentials": "<REDACTED>",
     "serviceProviderAwsAccountId": "851725534441",
-    "versionSf": "4.1.16",
+    "projectType": "framework",
+    "versionSf": "4.2.4",
     "serviceProviderAwsCfStackName": "miranda-backend-dev",
+    "integrations": {},
     "serviceProviderAwsCfStackId": "arn:aws:cloudformation:eu-west-3:851725534441:stack/miranda-backend-dev/6b795420-4b38-11ef-915f-0e8b47efde23",
     "serviceProviderAwsCfStackCreated": "2024-07-26T10:18:36.595Z",
-    "serviceProviderAwsCfStackUpdated": "2024-07-26T15:02:52.026Z",
+    "serviceProviderAwsCfStackUpdated": "2024-08-29T14:20:17.997Z",
     "serviceProviderAwsCfStackStatus": "UPDATE_COMPLETE",
     "serviceProviderAwsCfStackOutputs": [
       {
         "OutputKey": "AppLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:eu-west-3:851725534441:function:miranda-backend-dev-app:8",
+        "OutputValue": "arn:aws:lambda:eu-west-3:851725534441:function:miranda-backend-dev-app:9",
         "Description": "Current Lambda function version",
         "ExportName": "sls-miranda-backend-dev-AppLambdaFunctionQualifiedArn"
       },
