@@ -1,25 +1,31 @@
-import { BookingSimpleInterface, ContactInterface, MongoRoomInterface, UserInterface } from './interfaces/interfaces';
+import { BookingSimpleInterface, ContactInterface, MongoRoomInterface, RoomInterface, UserInterface } from './interfaces/interfaces';
 import { User } from "./services/userServices";
+import { Room } from "./services/roomsServices";
 import { Contact } from "./services/contactServices";
 import { Booking } from "./services/bookingServices";
 import { faker } from '@faker-js/faker';
 import { DateToString } from './utils/utils';
-import mysql from 'mysql2/promise';
+import mongoose from 'mongoose';
 
 const dotenv = require('dotenv');
 dotenv.config();
 
-const dataNumber = 20;
+const dataNumber = 10;
 
 async function setUpDB(){
     try {
-        await mysql.createConnection({
-			host: process.env.HOST as string,
-			user: process.env.USER as string,
-			database: process.env.DATABASE as string,
-		})
+        await mongoose.connect(process.env.MONGO_URI as string);
+        console.log("Connected correctly to server\n");
 
-        console.log("Connected to server correctly\n");
+        /*Clear DB
+        const db = client.db(dbName);
+        const collections = await db.collections();
+
+        for (const collection of collections) {
+            await collection.deleteMany({});
+        }
+        console.log("Database cleared!\n");
+        */
     }  catch (err) {
         console.log(err);
     }
@@ -77,7 +83,7 @@ async function seedContacts() {
 }
 
 const roomList:MongoRoomInterface[] = [];
-/*
+
 async function seedRooms() {
     const roomTypes:string[] = ['Single Bed', 'Double Bed', 'Double Superior', 'Suite'];
     const amenities:string[] = ['Air conditioner', 'High speed WiFi', 'Breakfast', 'Kitchen', 'Cleaning', 'Shower', 'Grocery',
@@ -113,7 +119,7 @@ async function seedRooms() {
         console.log(err);
     }
 }
-*/
+
 async function seedBookings() {
     try {
         const statuses:string[] = ["Check out", "Check in", "In progress"]
@@ -147,7 +153,7 @@ async function seedDB(){
     await setUpDB();
     await seedUsers();
     await seedContacts();
-    //await seedRooms();
+    await seedRooms();
     await seedBookings();
     console.log("Database seeded!\n");
 }
